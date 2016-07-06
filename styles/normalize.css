@@ -22,7 +22,8 @@ body {
   margin: 0;
   padding:0;
   /*background-color:#000000;*/
-  background: url(http://www.dennishanart.com/images/bg_o.jpg) repeat;
+  /*background: url(http://www.dennishanart.com/images/bg_o.jpg) repeat;*/
+  background: url(../images/bg_o.jpg) repeat;
 }
 
 .background-color {
