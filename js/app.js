@@ -12,15 +12,27 @@ var articles = [];
 
 // HELPER FUNCTIONS:
 
+// function addScore(article) {
+//   if (article.name === 'Cafe Mogador' || article.name === 'Cafe Tibet') {
+//       article.score = 7;
+//     } else if(article.name === 'Hard Rock Cafe New York' || article.name === 'Gratitude Cafe') {
+//       article.score = 3;
+//     } 
+//     else {
+//       article.score = 0;
+//     }
+// }
+
+var restaurantNamesToScores = {
+'Cafe Mogador': 7,
+'Cafe Tibet': 7,
+'Hard Rock Cafe New York': 3,
+'Gratitude Cafe': 3,
+'Café Regular du Nord': 8
+}
+
 function addScore(article) {
-  if (article.name === 'Cafe Mogador' || article.name === 'Cafe Tibet') {
-      article.score = 7;
-    } else if(article.name === 'Hard Rock Cafe New York' || article.name === 'Gratitude Cafe') {
-      article.score = 3;
-    } 
-    else {
-      article.score = 0;
-    }
+    article.score = (restaurantNamesToScores[article.name] || 0);
 }
 
 // `articleToHTML` renders an html string from
@@ -62,7 +74,7 @@ function setView(viewType) {
     $popup.removeClass('loader');
   } 
   else if (viewType === 'feed') {
-    // $popup.addClass('hidden');
+    $popup.addClass('hidden');
   } 
   else {
     // This `else` clause is optional but useful
@@ -82,7 +94,6 @@ function handleResponse(response) {
   // Grab only the "data" property from each object
   // in the array.
   articles = childrenFromResponse.map(function(child) {
-    // return child.venues;
     return child;
   });
 
@@ -123,10 +134,10 @@ function handleResponse(response) {
   setView('feed');
 }
 
-function handleError(error) {
-  alert("Something terrible has happened: " + 
-        error.status + " " + error.statusText);
-}
+// function handleError(error) {
+//   alert("Something terrible has happened: " + 
+//         error.status + " " + error.statusText);
+// }
 
 // SET EVENT LISTENERS:
 
@@ -151,46 +162,27 @@ $('#main.container').on('click', '.article a', function(event) {
 // Toggle search input box open or closed
 // when clicking on the search icon
 // and when submitting a search
-var toggleSearch = function() {
-  $('#search').toggleClass('active');
-}
-$('#search a').on('click', toggleSearch);
-$('#search input').on('keypress', function(event) {
-  if (event.which === 13) { // 13 is the code for the `enter` key
-    toggleSearch();
-  }
-})
+// var toggleSearch = function() {
+//   $('#search').toggleClass('active');
+// }
+// $('#search a').on('click', toggleSearch);
+// $('#search input').on('keypress', function(event) {
+//   if (event.which === 13) { // 13 is the code for the `enter` key
+//     toggleSearch();
+//   }
+// })
 
 // Go back to main feed when `X` is clicked in popup
 $('.closePopUp').on('click', function(event) {
   setView('feed');
 });
 
-// Go back to default feed when Feedr logo is clicked
-// (This doesn't really do anything yet because there's
-// only one feed)
+
 $('header .logo').on('click', function(event) {
   setView('feed');
 });
 
-// THE CODE THAT SETS EVERYTHING IN MOTION:
 
-// Show the 'Pac-man' overlay
-// setView('loader');
-
-// // Fetch data from Reddit and away we go.
-
-// // The $.get function is a specialized version of the 
-// // $.ajax function, which has more features but is slightly
-// // less convenient than $.get for common cases. The $.get 
-// // function does not do error callbacks, though, so we're 
-// // using $.ajax now.
-// // $.ajax({
-// //   method: 'GET',
-// //   url: 'https://www.reddit.com/top.json',
-// //   success: handleResponse,
-// //   error: handleError
-// // });
 var clientSecret = 'KY2ZINTAT2VIVYMVBADH5Q04FHAWYJO2G454IT1RAMDOCQJA';
 var clientId = 'NSP0OXOULK4MFPMFGZRNEGEPM0QQAN04YHSRZVYAMYXOQUAV';
 var userInput = function () {
@@ -215,6 +207,7 @@ var userInput = function () {
 }
 userInput();
 
+// about tab
 $('.drawer-tab').hover(function() {
   $(this).css({'height': '40px', 'font-size': '1.5em'})
 }, function() {
