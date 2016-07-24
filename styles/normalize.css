@@ -22,8 +22,7 @@ body {
   margin: 0;
   padding:0;
   /*background-color:#000000;*/
-  /*background: url(http://www.dennishanart.com/images/bg_o.jpg) repeat;*/
-  background: url(../images/bg_o.jpg) repeat;
+  background: url(http://www.dennishanart.com/images/bg_o.jpg) repeat;
 }
 
 .background-color {
@@ -322,7 +321,7 @@ input[type="submit"] {
 }
 
 button:hover {
-                background-color:#4495D1;
+                background-color:#555;
             }
 
 /**
