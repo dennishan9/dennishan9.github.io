@@ -3,25 +3,7 @@
 //https://api.foursquare.com/v2/venues/search?client_id=NSP0OXOULK4MFPMFGZRNEGEPM0QQAN04YHSRZVYAMYXOQUAV&client_secret=KY2ZINTAT2VIVYMVBADH5Q04FHAWYJO2G454IT1RAMDOCQJA&v=20160629&m=foursquare&query=cafe&near=11225
 
 
-// OUR MAIN STATE VARIABLE:
-
-// This is the main data storage array for all the articles
-// (often called "state")
-// It will be available in closures everywhere in the code.
 var articles = [];
-
-// HELPER FUNCTIONS:
-
-// function addScore(article) {
-//   if (article.name === 'Cafe Mogador' || article.name === 'Cafe Tibet') {
-//       article.score = 7;
-//     } else if(article.name === 'Hard Rock Cafe New York' || article.name === 'Gratitude Cafe') {
-//       article.score = 3;
-//     } 
-//     else {
-//       article.score = 0;
-//     }
-// }
 
 var restaurantNamesToScores = {
 'Cafe Mogador': 7,
@@ -41,7 +23,6 @@ function addScore(article) {
 function articleToHTML(article) {
   return '<article class="article">' +
          '  <section class="featuredImage">' +
-        //  '    <img src="' + article.categories.icon.prefix + '90.png"' + ' alt="" />' +
          '  </section>' +
          '  <section class="articleContent">' +
          '    <a href="#"><h3>' + article.name + '</h3></a>' +
@@ -57,11 +38,6 @@ function articleToHTML(article) {
          '</article>';         
 }
 
-// This `setView` function isolates 
-// the confusion about what the `hidden`
-// and `loader` classes mean for the popup,
-// so you only have to puzzle through it in
-// your head once.
 function setView(viewType) {
   var $popup = $('#popUp');
 
@@ -77,10 +53,6 @@ function setView(viewType) {
     $popup.addClass('hidden');
   } 
   else {
-    // This `else` clause is optional but useful
-    // if you (the programmer) forget the system 
-    // of viewTypes that you worked out, and 
-    // use a wrong one.
     throw new Error("Only acceptable arguments to setView " +
                     "are 'loader', 'detail' and 'feed'");
   }
@@ -134,43 +106,20 @@ function handleResponse(response) {
   setView('feed');
 }
 
-// function handleError(error) {
-//   alert("Something terrible has happened: " + 
-//         error.status + " " + error.statusText);
-// }
-
 // SET EVENT LISTENERS:
 
 // Go to article detail
 $('#main.container').on('click', '.article a', function(event) {
 
-  // Get the right article object, which we can do because the 
-  // article elements in the feed in the DOM will be in the 
-  // same order as the ones in the articles array.
   var index = $(this).index();
   
   var article = articles[index];
 
   // Render the article in the detail view.
   $('#popUp h1').html(article.name);
-  // $('#popUp p').html(article.author);
-  // $('#popUp a.popUpAction').attr('href', 'http://reddit.com' + article.permalink);
 
   setView('detail');
 });
-
-// Toggle search input box open or closed
-// when clicking on the search icon
-// and when submitting a search
-// var toggleSearch = function() {
-//   $('#search').toggleClass('active');
-// }
-// $('#search a').on('click', toggleSearch);
-// $('#search input').on('keypress', function(event) {
-//   if (event.which === 13) { // 13 is the code for the `enter` key
-//     toggleSearch();
-//   }
-// })
 
 // Go back to main feed when `X` is clicked in popup
 $('.closePopUp').on('click', function(event) {
