@@ -109,27 +109,43 @@ function handleResponse(response) {
 // SET EVENT LISTENERS:
 
 // Go to article detail
-$('#main.container').on('click', '.article a', function(event) {
+// $('#main.container').on('click', '.article a', function(event) {
 
-  var index = $(this).index();
+//   var index = $(this).index();
   
-  var article = articles[index];
+//   var article = articles[index];
 
-  // Render the article in the detail view.
-  $('#popUp h1').html(article.name);
+//   // Render the article in the detail view.
+//   $('#popUp h1').html(article.name);
 
-  setView('detail');
-});
+//   setView('detail');
+// });
 
-// Go back to main feed when `X` is clicked in popup
+$('#main.container').on('click', '.article', function(event) {
+    setView('detail');
+
+  })
+
+ // Go back to main feed when `X` is clicked in popup
 $('.closePopUp').on('click', function(event) {
   setView('feed');
 });
 
 
-$('header .logo').on('click', function(event) {
-  setView('feed');
-});
+// $('header .logo').on('click', function(event) {
+//   setView('feed');
+// });
+
+// var articles = [];
+
+  $('#main.container').on('click', '.article', function(event) {
+    var index = $(this).index();
+    var article = articles[index];
+    $('#popUp h1').html(article.name);
+    // $('#popUp p').html(article.author);
+    // $('#popUp a.popUpAction').attr('href', 'http://reddit.com' + article.permalink);
+    setView('detail');
+  });
 
 
 var clientSecret = 'KY2ZINTAT2VIVYMVBADH5Q04FHAWYJO2G454IT1RAMDOCQJA';
