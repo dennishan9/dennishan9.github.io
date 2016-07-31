@@ -141,8 +141,9 @@ $('.closePopUp').on('click', function(event) {
   $('#main.container').on('click', '.article', function(event) {
     var index = $(this).index();
     var article = articles[index];
+    // console.log(article.url);
     $('#popUp h1').html(article.name);
-    // $('#popUp p').html(article.author);
+    $('#popUp p').html(article.location.city);
     // $('#popUp a.popUpAction').attr('href', 'http://reddit.com' + article.permalink);
     setView('detail');
   });
